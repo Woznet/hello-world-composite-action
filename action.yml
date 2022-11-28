@@ -1,0 +1,17 @@
+name: 'Push-to-Github'
+description: 'Push changes made in github workspace'
+
+runs:
+  using: "composite"
+  steps:
+      - name: Push repo changes to Github
+        shell: pwsh
+        run: |
+          date > generated.txt
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add --all .
+          git commit -m "$([datetime]::Today.ToString('MM-dd-yy'))"
+          git push
+
+
